@@ -1,5 +1,7 @@
 import socket
 import threading
+import time
+
 HOST = "127.0.0.1"
 PORT = 8080
 
@@ -32,10 +34,14 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client:
     receive_thread.start()
 
     while True:
+        
         message = input("Message: ")
 
         if message == "exit":
             client.send(message.encode())
             break
+        
 
-        client.send(message.encode())
+        current_time =time.strftime("%H:%M:%S")
+        
+        client.send(f"[{current_time}] {username}:{message}".encode())

@@ -14,7 +14,7 @@
 
 import socket
 import threading
-import time
+
 
 HOST = "127.0.0.1"
 PORT = 8080
@@ -57,10 +57,9 @@ def receive_messages(conn, username):
                   conn.send(online_users.encode())
                   continue
         
-          current_time = time.strftime("%H:%M:%S")
-          print(f"[{current_time}] {username}:{message} ")
+          print(message)
           for client in clients:
-               client.send(message.encode())
+            client.send(message.encode())
 #conn.close()
 
 def handle_client(conn, addr):
